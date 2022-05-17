@@ -4,7 +4,7 @@ using namespace ariel;
 using namespace std;
 
 
-int main(){
+int maain(){
 
 
     OrgChart og;

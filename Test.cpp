@@ -118,84 +118,84 @@ TEST_CASE("Legal cases, with different data types"){
 
 }
 
-TEST_CASE("Merging of existing trees"){
+// TEST_CASE("Merging of existing trees"){
 
-    OrgChart<int> o;
-    CHECK_NOTHROW(
-      o.add_root(1)
-      .add_sub(1, 2) 
-      .add_sub(1, 3)
-      .add_sub(2, 4)
-      .add_sub(2, 5)
-      .add_sub(3, 6)
-      .add_sub(6,7)
-      .add_sub(6,8));      
+//     OrgChart<int> o;
+//     CHECK_NOTHROW(
+//       o.add_root(1)
+//       .add_sub(1, 2) 
+//       .add_sub(1, 3)
+//       .add_sub(2, 4)
+//       .add_sub(2, 5)
+//       .add_sub(3, 6)
+//       .add_sub(6,7)
+//       .add_sub(6,8));      
 
-    /*       1
-            / \
-           /   \
-          2     3
-         / \     \
-        4  5      6
-                 / \
-                7   8
+//     /*       1
+//             / \
+//            /   \
+//           2     3
+//          / \     \
+//         4  5      6
+//                  / \
+//                 7   8
 
-    */
+//     */
 
 
-   OrgChart<int> o2;
-   CHECK_NOTHROW(o2.add_root(10)
-   .add_sub(10,11)
-   .add_sub(10,12)
-   .add_sub(10,13)
-   .add_sub(12,14));
+//    OrgChart<int> o2;
+//    CHECK_NOTHROW(o2.add_root(10)
+//    .add_sub(10,11)
+//    .add_sub(10,12)
+//    .add_sub(10,13)
+//    .add_sub(12,14));
 
-/*
-            10
-           / | \
-          /  |  \
-        11  12  13
-             |
-            14
-*/
-    CHECK_NOTHROW(o.add_sub(8,o2));
-    /*       1
-            / \
-           /   \
-          2     3
-         / \     \
-        4  5      6
-                 / \
-                7   8
-                    |
-                   10
-                  / | \
-                 /  |  \
-               11  12  13
-                    |
-                   14
-    */
+// /*
+//             10
+//            / | \
+//           /  |  \
+//         11  12  13
+//              |
+//             14
+// */
+//     CHECK_NOTHROW(o.add_sub(8,o2));
+//     /*       1
+//             / \
+//            /   \
+//           2     3
+//          / \     \
+//         4  5      6
+//                  / \
+//                 7   8
+//                     |
+//                    10
+//                   / | \
+//                  /  |  \
+//                11  12  13
+//                     |
+//                    14
+//     */
 
-    std::vector<int> pre1 {1,2,4,5,3,6, 7, 8, 10, 11, 12, 14, 13};
-    std::vector<int> level1 {1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14};
-    std::vector<int> reverse1 {14, 11, 12, 13, 10, 7, 8, 4, 5, 6, 2, 3, 1};
+//     std::vector<int> pre1 {1,2,4,5,3,6, 7, 8, 10, 11, 12, 14, 13};
+//     std::vector<int> level1 {1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14};
+//     std::vector<int> reverse1 {14, 11, 12, 13, 10, 7, 8, 4, 5, 6, 2, 3, 1};
 
-    auto it1 = pre1.begin();
-    auto it2 = level1.begin();
-    auto it3 = reverse1.begin();
+//     auto it1 = pre1.begin();
+//     auto it2 = level1.begin();
+//     auto it3 = reverse1.begin();
 
-    std::cout<<o;
-    for(auto it= o.begin_preorder(); it != o.end_preorder(); ++it){
-        CHECK(*it == *it1++);
-    }
-    for(auto it= o.begin_level_order(); it != o.end_level_order(); ++it){
-        CHECK(*it == *it2++);
-    }
-    for(auto it= o.begin_reverse_order(); it != o.end_reverse_order(); ++it){
-        CHECK(*it == *it3++);
-        }
+//     std::cout<<o;
+//     for(auto it= o.begin_preorder(); it != o.end_preorder(); ++it){
+//         CHECK(*it == *it1++);
+//     }
+//     for(auto it= o.begin_level_order(); it != o.end_level_order(); ++it){
+//         CHECK(*it == *it2++);
+//     }
+//     for(auto it= o.begin_reverse_order(); it != o.end_reverse_order(); ++it){
+//         CHECK(*it == *it3++);
+//         }
     
-}
+// }
 
 
 TEST_CASE("Utilities"){

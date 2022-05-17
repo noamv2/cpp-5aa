@@ -52,7 +52,12 @@ private:
     Node<T>* root;
 
 public:
+
     OrgChart():root{nullptr}{}
+    OrgChart(OrgChart & o){}
+    OrgChart(OrgChart && o) noexcept{}
+    OrgChart & operator=(OrgChart og){return *this;}
+    OrgChart & operator=(OrgChart &&og) noexcept{return *this;}
     Node<T>* getRoot(){return root;}
     //methods
     OrgChart & add_root(T ceo){
@@ -116,20 +121,21 @@ public:
     }
 
     friend std::ostream& operator<<( std::ostream& os, OrgChart & og){
-        print(og.getRoot(), os, "", true);
+        print(og.getRoot(), os);
+        // print(og.getRoot(), os, "", true);
         return os;
     }
 
-    static void print(Node<T>* root, std::ostream& os, std::string prefix, bool isLast){
+    // static void print(Node<T>* root, std::ostream& os, std::string prefix, bool isLast){
 
-        os<<prefix<<"+- "<<root->getData()<<std::endl;
-        prefix += (isLast) ? "   " : "|  ";
+    //     os<<prefix<<"+- "<<root->getData()<<std::endl;
+    //     prefix += (isLast) ? "   " : "|  ";
 
-        for(size_t i = 0; i < root->getSubs().size(); i++){
-            print(root->getSubs().at(i), os, prefix, i + 1 == root->getSubs().size());
-        } 
+    //     for(size_t i = 0; i < root->getSubs().size(); i++){
+    //         print(root->getSubs().at(i), os, prefix, i + 1 == root->getSubs().size());
+    //     } 
 
-    }
+    // }
 
 
     //iterator generators
@@ -159,12 +165,17 @@ public:
         // find the rightmost node and use it to create iterator
         return Iterator<T>{REVRSE};
     }
+    Iterator<T> reverse_order(){
+        return end_reverse_order();
+    }
     Iterator<T> begin(){
         return begin_level_order();
     }
     Iterator<T> end(){
         return end_level_order();
     }
+
+    
 };
 
 template <class T> class Iterator{
